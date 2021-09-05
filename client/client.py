@@ -1,17 +1,21 @@
 import socket
 import json
+import sys
 
-HOST = '127.0.0.1'
+HOST = 'localhost'
 PORT = 50000
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((HOST, PORT))
-send = input()
-send = {'id': 'oi', 'nom': 'kev'}
+# send = input()
+# send = {'nome': 'Kevin', 'outro': 'kev'}
+send = {'id': '2', 'value': 9999}
 # client.sendall(str.encode('Kevin'))
 
-client.sendall('--method:GET --path:/register/patient --data:{}'.format(json.dumps(send)).encode())
+# client.sendall('--method:POST --path:/register/patient --data:{}'.format(json.dumps(send)).encode('utf-8'))
+client.sendall('PATCH /update/saturacao {}'.format(json.dumps(send)).encode('utf-8'))
 	
-client.close()
-data = client.recv(1024)
+data = client.recv(8192)
 print('Msg', data.decode())
+client.close()
+sys.exit()
