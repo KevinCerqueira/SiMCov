@@ -1,20 +1,10 @@
 {
     "0": {
-        "nome": "Kevin1",
-        "saturacao": "99",
-        "pressao": "100",
-        "batimentos": "77"
-    },
-    "1": {
-        "nome": "KevinUPDATE",
-        "saturacao": "99",
-        "pressao": "100",
-        "batimentos": "77"
-    },
-    "2": {
-        "nome": "Kevin12",
-        "saturacao": 9999,
-        "pressao": "100",
-        "batimentos": "77"
+        "id": 0,
+        "nome": "novopat",
+        "medicao": false,
+        "saturacao": 0,
+        "pressao": 0,
+        "batimentos": 0
     }
 }
