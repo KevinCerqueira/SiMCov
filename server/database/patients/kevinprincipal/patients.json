@@ -2,18 +2,19 @@
     "0": {
         "id": 0,
         "nome": "novopat",
-        "medicao": false,
-        "saturacao": 0,
-        "pressao": 0,
-        "batimentos": 0
+        "medicao": true,
+        "saturacao": 87,
+        "pressao": 97,
+        "batimento": 98,
+        "temperatura": 94
     },
-    "1": {
-        "id": 1,
+    "2": {
+        "id": 2,
         "nome": "novopat2",
-        "medicao": false,
-        "saturacao": 0,
-        "pressao": 0,
-        "batimentos": 0,
-        "temperatura": 0
+        "medicao": true,
+        "saturacao": 7771,
+        "pressao": 999,
+        "batimento": 999,
+        "temperatura": 999
     }
 }

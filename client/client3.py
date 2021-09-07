@@ -13,12 +13,12 @@ input()
 # send = {'id': 2, 'saturacao': 999, 'batimento': 999, 'pressao': 999, 'temperatura': 999}
 # send = {'username': 'kevinprincipal', 'password': '123'}
 # send = {'id': '0', 'value': 89}
-# send = {'nome': 'novopat2'}
-# send = {'id': 0}
-send = {}
+send = {'nome': 'novopat2'}
+# send = {'id': '1'}
+# send = {}
 # client.sendall(str.encode('Kevin'))
 metodo = 'GET'
-rota = '/get/patient/0'
+rota = '/close-socket'
 # rota = '/update/patient'
 # rota = '/delete/patient'
 host = HOST+':'+str(PORT)
@@ -34,12 +34,6 @@ client.sendall((request).encode('utf-8'))
 	
 data = client.recv(8192)
 print('Msg', data.decode())
-fecha = int(input('Fecha?'))
-if(fecha == 1):
-	metodo = 'GET'
-	rota = '/close-socket'
-	request = '{} {} HTTP/1.1\r\nHost: {}\r\nUser-Agent: client\r\nContent-Type: application/json\r\n{}\r\nAccept: */*\r\nContent-Length: 21\r\n\r\n{}'.format(metodo, rota, host, auth, json.dumps(send))
-	client.sendall((request).encode('utf-8'))
 	
 client.close()
 sys.exit()
