@@ -49,7 +49,7 @@ class ControlDB:
 		
 		# Atribuindo um novo ID para o paciente
 		new_id = int(self.getLastId(path)) + 1
-		new_data = {'id': new_id, 'nome': data['nome'], 'medicao': False, 'saturacao': 0, 'pressao': 0, 'batimento': 0, 'temperatura': 0}
+		new_data = {'id': new_id, 'nome': data['nome'], 'idade': data['idade'], 'sexo': data['sexo'], 'medicao': False, 'saturacao': 0, 'pressao': 0, 'batimento': 0, 'temperatura': 0}
 		
 		# Pega todos os pacientes daquele medico e adiciona o novo no final deles
 		current_data = self.getAll(path)
@@ -166,7 +166,7 @@ class ControlDB:
 			data_read[str(patient_id)][attr] = value
 			with open(path, 'w', encoding='utf-8') as db_write:
 				json.dump(data_read, db_write, ensure_ascii=False, indent=4)
-			return data_read[str(patient_id)]
+			return True
 	
 	# Atualiza os atributos de um paciente por completo.
 	def updatePatient(self, doctor_username, patient_id, attrs):
@@ -184,7 +184,7 @@ class ControlDB:
 			
 			with open(path, 'w', encoding='utf-8') as db_write:
 				json.dump(data_read, db_write, ensure_ascii=False, indent=4)
-			return data_read[str(patient_id)]
+			return True
 	
 	# Verifica se existe um paciente com base no nome de usuario do medico.
 	def has(self, doctor_username, id):

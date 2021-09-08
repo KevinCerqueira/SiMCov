@@ -9,20 +9,21 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((HOST, PORT))
 # send = input()
 # send = {'id': 1, 'nome': 'Kevin', 'saturacao': 87, 'batimento': 98, 'pressao': 97}
-input()
-send = {'id': 2, 'saturacao': 7771, 'batimento': 999, 'pressao': 999, 'temperatura': 999}
+# input()
+# send = {'id': 2, 'saturacao': 7771, 'batimento': 999, 'pressao': 999, 'temperatura': 999}
 # send = {'username': 'kevinprincipal', 'password': '123'}
 # send = {'id': '0', 'value': 89}
 # send = {'nome': 'novopat2'}
 # send = {'id': '1'}
-# send = {}
+send = {}
 # client.sendall(str.encode('Kevin'))
-metodo = 'PUT'
+metodo = 'GET'
 # rota = '/register/patient'
-rota = '/update/patient'
+# rota = '/update/patient'
+rota = 'get/list/priority'
 # rota = '/delete/patient'
 host = HOST+':'+str(PORT)
-auth = 'Authorization: Bearer a2V2aW5wcmluY2lwYWw6MTIz'
+auth = 'Authorization: Bearer a2V2aW4yOjEyMw=='
 request = '{} {} HTTP/1.1\r\nHost: {}\r\nUser-Agent: insomnia/2021.4.1\r\nContent-Type: application/json\r\n{}\r\nAccept: */*\r\nContent-Length: 21\r\n\r\n{}'.format(metodo, rota, host, auth, json.dumps(send))
 
 # print(request)

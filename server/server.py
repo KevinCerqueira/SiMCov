@@ -7,6 +7,7 @@ import base64
 import re
 from collections import deque
 from controldb import ControlDB
+from controllevels import ControlLevels
 class Server:
 
 	HOST = 'localhost'
@@ -20,6 +21,8 @@ class Server:
 	
 	queue_request = None
 	thread_request = None
+	
+	controllevels = None
 	
 	close = False
 	
@@ -90,13 +93,16 @@ class Server:
 	# Função responsável pelo roteamente, identifica os metodos e as rotas requisitadas
 	def routing(self, client, method, path, data, token):
 		if(method == ''):
-			self.sendToClientError('Requisicao invalida')
-			
+			self.sendToClientError(client, 'Requisicao invalida')
+		
+		# Verificando autenticação
+		if(((method in ['PUT', 'PATCH', 'DELETE', 'GET'] or path == '/register/patient') and (not path == '/')) and (not self.middleware(client, token))):
+			return client.close()
+		
 		# Requisições do tipo POST: para a criação de novos dados.
-		elif(method == 'POST'):
+		if(method == 'POST'):
 			if(path == '/register/patient'):
-				if(self.middleware(client, token)):
-					self.registerPatient(client, token, data)
+				self.registerPatient(client, token, data)
 			elif(path == '/register/doctor'):
 				self.registerDoctor(client, data)
 			elif(path == '/login'):
@@ -107,14 +113,14 @@ class Server:
 		# Requisições do tipo GET: retornar dados.
 		elif(method == 'GET'):
 			if(path == '/'):
-				print('Bem vindo ao sistema!')
+				self.sendToClientOk(client, 'Bem vindo ao sistema!')
 			elif(path == '/get/patients'):
-				if(self.middleware(client, token)):
-					self.getPatients(client, token, data)
+				self.getPatients(client, token, data)
 			elif('/get/patient/' in path):
-				if(self.middleware(client, token)):
-					patient_id = path.replace('/get/patient/', '')
-					self.getPatient(client, token, patient_id)
+				patient_id = path.replace('/get/patient/', '')
+				self.getPatient(client, token, patient_id)
+			elif('/get/list/priority'):
+				self.getListPriority(client, token)
 			elif(path == '/close-connection'):
 				self.closeConnection(client)
 			elif(path == '/close-socket'):
@@ -127,8 +133,7 @@ class Server:
 			if('/update/' in path):
 				attribute = path.replace('/update/', '') # /saturacao/batimento/pressao/temperatura
 				if(attribute in ['saturacao', 'batimento', 'pressao', 'temperatura']):
-					if(self.middleware(client, token)):
-						self.updateAttribute(client, token, data, attribute)
+					self.updateAttribute(client, token, data, attribute)
 				else:
 					self.routeNotFound(client)
 			else:
@@ -137,22 +142,22 @@ class Server:
 		# Requisições do tipo PUT: para atualizações completas.
 		elif(method == 'PUT'):
 			if(path == '/update/patient'):
-				if(self.middleware(client, token)):
-					self.updatePatient(client, token, data)
+				self.updatePatient(client, token, data)
 			else:
 				self.routeNotFound(client)
 				
 		# Requisições do tipo DELETE: para deleções.
 		elif(method == 'DELETE'):
 			if(path == '/delete/patient'):
-				if(self.middleware(client, token)):
-					self.deletePatient(client, token, data)
+				self.deletePatient(client, token, data)
 			else:
 				self.routeNotFound(client)
 		else:
 			self.routeNotFound(client)
 		
 		return client.close()
+		# self.server_socket.close()
+		# sys.exit()
 	
 	# Fecha a conexão do cliente
 	def closeConnection(self, client):
@@ -218,6 +223,8 @@ class Server:
 	
 	# Registra um novo paciente
 	def registerPatient(self, client, token, data):
+		if(not ('nome' in data and 'sexo' in data and 'idade' in data)):
+			return self.sendToClientError(client, "Parametros 'nome', 'idade' e 'sexo' são necessários para criar um paciente")
 		doctor = self.controldb.getDoctorByToken(token)
 		return self.sendToClientOk(client, {'id': self.controldb.createPatient(doctor['username'], data)})
 	
@@ -233,13 +240,20 @@ class Server:
 	
 	# Atualiza determinado atributo de um paciente
 	def updateAttribute(self, client, token, data, attr):
+		if(not ('id' in data and 'value' in data)):
+			return self.sendToClientError(client, "Parametros 'id' e 'value' são necessários para atualizar o paciente")
 		doctor = self.controldb.getDoctorByToken(token)
 		patient_id = data['id']
 		value_attr = data['value'] 
 		success = self.controldb.updateAttribute(doctor['username'], patient_id, attr, value_attr)
 		if(success == False):
-			return self.sendToClientError('Nao foi possivel atualizar medicao.')
-		return self.sendToClientOk(client, success)
+			return self.sendToClientError(client, 'Nao foi possivel atualizar medicao.')
+		
+		patients = self.controldb.getPatientsByDoctor(doctor['username'])
+		controllevels = ControlLevels(patients)
+		list_priority = controllevels.process()
+		
+		return self.sendToClientOk(client, list_priority)
 	
 	# Atualiza todos os atributos de um paciente
 	def updatePatient(self, client, token, data):
@@ -247,17 +261,31 @@ class Server:
 		patient_id = data['id']
 		success = self.controldb.updatePatient(doctor['username'], patient_id, data)
 		if(success == False):
-			return self.sendToClientError('Nao foi possivel atualizar medicoes.')
-		return self.sendToClientOk(client, success)
+			return self.sendToClientError(client, 'Nao foi possivel atualizar medicoes.')
+		
+		patients = self.controldb.getPatientsByDoctor(doctor['username'])
+		controllevels = ControlLevels(patients)
+		list_priority = controllevels.process()
+		
+		return self.sendToClientOk(client, list_priority)
 	
 	# Deleta um paciente
 	def deletePatient(self, client, token, data):
+		if(not ('id' in data)):
+			return self.sendToClientError(client, "Parametros 'id' necessários para deletar o paciente")
 		doctor = self.controldb.getDoctorByToken(token)
 		patient_id = data['id']
 		success = self.controldb.deletePatient(doctor['username'], patient_id)
 		if(success == False):
-			return self.sendToClientError('Nao foi possivel deletar o paciente.')
-		return self.sendToClientOk(client, success)			
+			return self.sendToClientError(client, 'Nao foi possivel deletar o paciente.')
+		return self.sendToClientOk(client, success)
+	
+	def getListPriority(self, client, token):
+		doctor = self.controldb.getDoctorByToken(token)
+		patients = self.controldb.getPatientsByDoctor(doctor['username'])
+		controllevels = ControlLevels(patients)
+		list_priority = controllevels.process()
+		self.sendToClientOk(client, list_priority)
 			
 if __name__ == '__main__':
 	server = Server()
