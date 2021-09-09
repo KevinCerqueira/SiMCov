@@ -77,7 +77,10 @@ class ControlLevels:
 			new_list.append(patient)
 		
 		new_list.sort(reverse=True, key=self.valueSort)
-		return new_list
+		patients = []
+		for patient in new_list:
+			patients.append(patient[1])
+		return patients
 		
 	def valueSort(self, el):
 		return el[0]
