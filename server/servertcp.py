@@ -62,7 +62,7 @@ class ServerTCP:
 		request_raw = client.recv(8192)
 		
 		request_clean = str(request_raw.decode('utf-8'))
-		
+
 		content_parts = request_clean.split(' ')
 		method = content_parts[0].replace(' ', '')
 		path = content_parts[1].replace(' ', '')

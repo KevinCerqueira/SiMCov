@@ -66,8 +66,7 @@ class ControlLevels:
 				patient[0] = patient[0] + 8
 				
 			# Pressao
-			pressao = patient[1]['pressao'].split('/')
-			if(float(pressao[0].replace(',', '.')) >= 13.0):
+			if(int(patient[1]['pressao']) >= 130):
 				patient[0] = patient[0] + 10
 				
 			# Batimentos

@@ -6,7 +6,7 @@
         "sexo": "M",
         "medicao": true,
         "saturacao": 89,
-        "pressao": "12/8",
+        "pressao": "128",
         "batimento": 78,
         "temperatura": "37,8"
     },
@@ -17,7 +17,7 @@
         "sexo": "M",
         "medicao": true,
         "saturacao": 95,
-        "pressao": "14/9",
+        "pressao": "149",
         "batimento": 99,
         "temperatura": "36,5"
     },
@@ -28,7 +28,7 @@
         "sexo": "M",
         "medicao": true,
         "saturacao": 93,
-        "pressao": "13/8",
+        "pressao": "138",
         "batimento": 89,
         "temperatura": "37,1"
     },
@@ -39,7 +39,7 @@
         "sexo": "M",
         "medicao": true,
         "saturacao": 98,
-        "pressao": "12/8",
+        "pressao": "128",
         "batimento": 65,
         "temperatura": "36,6"
     },
