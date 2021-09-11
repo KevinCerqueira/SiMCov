@@ -1,5 +1,4 @@
 <?php
-session_start();
 define('MYPATH', '../');
 include_once(MYPATH . 'auth.php');
 if (isset($_POST['id'])) {

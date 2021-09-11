@@ -64,11 +64,11 @@ $response = $client->getAll();
 					<?php if ($response->success) {
 						foreach ($response->data->patients as $patient) {
 					?>
-							<div id="<?php echo $patient->id ?>" class="mb-2 bg-info p-2">
+							<div id="<?php echo $patient->id ?>" class="mb-2 <?php echo $patient->medicao ? 'bg-info' : 'bg-secondary'; ?> p-2">
 								<p class="h5 text-light mb-2"><?php echo $patient->nome ?></p>
 								<div class="btns">
 									<div class="p-0 row">
-										<div class="col-md-3">
+										<div class="col-md-3 text-center mb-3">
 											<label class='fw-bold'>&nbsp;&nbsp;&nbsp;SpO2 Oximet.&nbsp;&nbsp;&nbsp;
 												<button class='btn btn-light p-1 btn-up' attr='saturacao' patient='<?php echo $patient->id ?>'>
 													<i class='fa fa-sort-asc' aria-hidden='true' style='color: #000'></i>
@@ -78,7 +78,7 @@ $response = $client->getAll();
 												</button>
 											</label>
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-3 text-center mb-3">
 											<label class='fw-bold'><i class='fa fa-thermometer-half' style='font-size: 22px !important;'></i>&nbsp;Termômet.&nbsp;&nbsp;
 												<button class='btn btn-light p-1 btn-up' attr='temperatura' patient='<?php echo $patient->id ?>'>
 													<i class='fa fa-sort-asc' aria-hidden='true' style='color: #000'></i>
@@ -88,7 +88,7 @@ $response = $client->getAll();
 												</button>
 											</label>
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-3 text-center mb-3">
 											<label class='fw-bold'><i class='fa fa-clock-o' style='font-size: 22px !important;'></i>&nbsp;Esfigmo.&nbsp;&nbsp;
 												<button class='btn btn-light p-1 btn-up' attr='pressao' patient='<?php echo $patient->id ?>'>
 													<i class='fa fa-sort-asc' aria-hidden='true' style='color: #000'></i>
@@ -98,7 +98,7 @@ $response = $client->getAll();
 												</button>
 											</label>
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-3 text-center mb-3">
 											<label class='fw-bold'><i class='fa fa-heartbeat' style='font-size: 20px !important;'></i>&nbsp;Frequencí.&nbsp;&nbsp;
 												<button class='btn btn-light p-1 btn-up' attr='batimento' patient='<?php echo $patient->id ?>'>
 													<i class='fa fa-sort-asc' aria-hidden='true' style='color: #000'></i>

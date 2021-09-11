@@ -15,7 +15,7 @@ include_once('../templates/header.php');
 				<p class="h2 text-center">SiMCov
 					<i class="fa fa-user-md" style="color: #000;"></i>
 				</p>
-				<p class="h4 text-center mt-4">Cadatro</p>
+				<p class="h4 text-center mt-4">Cadastro</p>
 				<div hidden id="alert-error" class="alert alert-danger" role="alert">
 					<p id="alert-text-error" class="h5 m-0"></p>
 				</div>
@@ -71,7 +71,26 @@ include_once('../templates/header.php');
 				response = JSON.parse(data);
 				console.log(response);
 				if (response.success) {
-					return window.location = '<?php echo MYPATH; ?>index.php'
+					let timerInterval
+					Swal.fire({
+						title: 'Registrado com sucesso!',
+						html: 'Aguarde que você será redirecionado...',
+						timer: 2000,
+						timerProgressBar: true,
+						didOpen: () => {
+							Swal.showLoading()
+							const b = Swal.getHtmlContainer().querySelector('b')
+							timerInterval = setInterval(() => {
+								b.textContent = Swal.getTimerLeft()
+							}, 100)
+						},
+						willClose: () => {
+							clearInterval(timerInterval)
+						}
+					}).then((result) => {
+						return window.location = '<?php echo MYPATH; ?>index.php'
+					})
+
 				} else {
 					$('#alert-error').removeAttr('hidden');
 					$('#alert-text-error').text(response.error);

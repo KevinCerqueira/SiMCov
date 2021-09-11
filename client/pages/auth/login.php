@@ -7,7 +7,7 @@ if (isset($_SESSION['auth'])) {
 }
 include_once('../templates/header.php');
 ?>
-<title>Login</title>
+<title>Entrar</title>
 <div class="container p-5">
 	<div class="card">
 		<div class="card-body">
@@ -15,7 +15,7 @@ include_once('../templates/header.php');
 				<p class="h2 text-center">SiMCov
 					<i class="fa fa-user-md" style="color: #000;"></i>
 				</p>
-				<p class="h4 text-center mt-4">Login</p>
+				<p class="h4 text-center mt-4">Entrar</p>
 				<div hidden id="alert-error" class="alert alert-danger" role="alert">
 					<p id="alert-text-error" class="h5 m-0"></p>
 				</div>

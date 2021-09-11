@@ -10,12 +10,12 @@
 					<div class="">
 						<div class="mb-3">
 							<label for="name-patient">Nome do paciente:</label>
-							<input required minlength="4" maxlength="20" type="text" class="form-control inputs" name="nome" title="É necessário um nome para o paciente.">
+							<input required minlength="4" maxlength="20" type="text" class="form-control inputs" name="nome" placeholder="Fulado da Silva" title="É necessário um nome para o paciente.">
 						</div>
 						<div class="mb-3 row">
 							<div class="col-md-6">
 								<label for="age-patient">Idade:</label>
-								<input required type="number" class="form-control inputs" name="idade" title="É necessário informar a idade do paciente.">
+								<input required type="number" class="form-control inputs" name="idade" placeholder="21" title="É necessário informar a idade do paciente.">
 							</div>
 							<div class="col-md-6">
 								<label for="gender-patient">Sexo:</label>

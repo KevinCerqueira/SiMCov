@@ -49,7 +49,7 @@ class ControlDB:
 		
 		# Atribuindo um novo ID para o paciente
 		new_id = int(self.getLastId(path)) + 1
-		new_data = {'id': new_id, 'nome': data['nome'], 'idade': data['idade'], 'sexo': data['sexo'], 'medicao': False, 'saturacao': 0, 'pressao': 0, 'batimento': 0, 'temperatura': 0}
+		new_data = {'id': new_id, 'nome': data['nome'], 'idade': data['idade'], 'sexo': data['sexo'], 'medicao': False, 'saturacao': 0, 'pressao': 0, 'batimento': 0, 'temperatura': 0.0}
 		
 		# Pega todos os pacientes daquele medico e adiciona o novo no final deles
 		current_data = self.getAll(path)

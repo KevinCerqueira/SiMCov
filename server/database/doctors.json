@@ -1,17 +1,12 @@
 {
     "0": {
         "id": 0,
-        "username": "kevin2",
-        "auth": "a2V2aW4yOjEyMw=="
+        "username": "kevincerqueira",
+        "auth": "a2V2aW5jZXJxdWVpcmE6MTIzNA=="
     },
     "1": {
         "id": 1,
-        "username": "kevinprincipal",
-        "auth": "a2V2aW5wcmluY2lwYWw6MTIz"
-    },
-    "2": {
-        "id": 2,
-        "username": "kevincerqueira",
-        "auth": "a2V2aW5jZXJxdWVpcmE6MTIzNA=="
+        "username": "usuario",
+        "auth": "dXN1YXJpbzoxMjM0"
     }
 }
