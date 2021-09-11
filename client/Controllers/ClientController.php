@@ -43,6 +43,17 @@ class ClientController
         $this->close();
         return json_decode($response);
     }
+    public function register($username, $password)
+    {
+        $this->connect();
+        $response = $this->send(false, 'POST', '/register/doctor', ['username' => $username, 'password' => $password]);
+        if ($response->success) {
+            $this->token = $response->data->token;
+            $_SESSION["auth"] = $this->token;
+            return $response;
+        }
+        return $response;
+    }
     public function login($username, $password)
     {
         $this->connect();
@@ -67,6 +78,27 @@ class ClientController
         $this->connect($udp = true);
         return $this->send(true, 'PATCH', "/update" . '/' . $att, ['id' => $id_patient, 'value' => $value]);
     }
+    public function updateAttributeOne(int $id_patient, string $att, int $updown)
+    {
+        $this->connect($udp = false);
+
+        $response = $this->send(false, 'GET', "/get/patient" . '/' . $id_patient);
+        if($response->success){
+            $patient = $response->data;
+            if($att != 'temperatura')
+                $new_value = intval($patient->{$att}) + (1 * $updown);
+            else
+                $new_value = doubleval($patient->temperatura) + (0.1 * doubleval($updown));
+            $this->connect($udp = true);
+            return $this->send(true, 'PATCH', "/update" . '/' . $att, ['id' => $id_patient, 'value' => $new_value]);
+        } 
+    }
+
+    public function getAll()
+    {
+        $this->connect();
+        return $this->send(false, 'GET', "/get/patients");
+    }
 
     public function getListPriority()
     {
@@ -78,5 +110,11 @@ class ClientController
     {
         $this->connect();
         return $this->send(false, 'POST', '/register/patient', ['nome' => $nome, 'idade' => $idade, 'sexo' => $sexo]);
+    }
+    public function deletePatient($id_patient)
+    {
+        $this->connect();
+        return $this->send(false, 'DELETE', '/delete/patient', ['id' => $id_patient]);
+        
     }
 }

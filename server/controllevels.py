@@ -60,9 +60,9 @@ class ControlLevels:
 				patient[0] = patient[0] + 5
 				
 			# Temperatura
-			if(float(patient[1]['temperatura'].replace(',', '.')) > 37.5):
+			if(float(patient[1]['temperatura']) > 37.5):
 				patient[0] = patient[0] + 10
-			elif(float(patient[1]['temperatura'].replace(',', '.')) < 36.0):
+			elif(float(patient[1]['temperatura']) < 36.0):
 				patient[0] = patient[0] + 8
 				
 			# Pressao

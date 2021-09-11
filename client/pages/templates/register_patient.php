@@ -10,7 +10,7 @@
 					<div class="">
 						<div class="mb-3">
 							<label for="name-patient">Nome do paciente:</label>
-							<input required type="text" class="form-control inputs" name="nome" title="É necessário um nome para o paciente.">
+							<input required minlength="4" maxlength="20" type="text" class="form-control inputs" name="nome" title="É necessário um nome para o paciente.">
 						</div>
 						<div class="mb-3 row">
 							<div class="col-md-6">
@@ -35,13 +35,12 @@
 		</div>
 	</div>
 </div>
-<script src="vendor/jquery/jquery.js"></script>
 <script>
 	$('#form-register-patient').submit(function(event) {
 		event.preventDefault();
 		$.ajax({
 			type: "POST",
-			url: "<?php echo MYPATH;?>Controllers/register_patient.php",
+			url: "<?php echo MYPATH; ?>Controllers/register_patient.php",
 			data: $('#form-register-patient').serialize(),
 			success: function(data) {
 				response = JSON.parse(data);

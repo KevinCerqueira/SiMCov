@@ -1,8 +1,9 @@
 <?php
 define('MYPATH', '');
 include_once('auth.php');
-include_once('pages/templates/register_patient.php');
 include_once('pages/templates/header.php');
+include_once('pages/templates/register_patient.php');
+include_once('pages/templates/delete_patient.php');
 ?>
 <style>
 	#menu .btn {
@@ -50,15 +51,15 @@ include_once('pages/templates/header.php');
 					</a>
 				</div>
 				<div class="col-md-4">
-					<button class="btn btn-warning">
-						<p class="h2"><a href="measure.php">Medir um paciente</a></p>
+					<a class="btn btn-warning" href="pages/change_patients.php">
+						<p class="h2">Medir um paciente</p>
 						<i class="fa fa-heartbeat"></i>
-					</button>
+					</a>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-danger btn-block">
+					<button class="btn btn-danger btn-block btn-apagar-paciente" data-bs-toggle="modal" data-bs-target="#delete-patient">
 						<p class="h2">Apagar um paciente</p>
 						<i class="fa fa-trash"></i>
 					</button>

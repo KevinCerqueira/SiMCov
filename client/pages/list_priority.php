@@ -108,10 +108,7 @@ include_once('templates/header.php');
 <script>
 	$(function(event) {
 
-		function alertWarning() {
-			var sound = new buzz.sound("../assets/alert.mp3");
-			sound.play();
-		}
+		const sound = new buzz.sound("../assets/alert.mp3");
 		setInterval(requestData, 3000);
 		async function requestData() {
 			await $.ajax({
@@ -132,10 +129,9 @@ include_once('templates/header.php');
 						$("#high").append(response.data.high);
 						$("#medium").append(response.data.medium);
 						$("#normal").append(response.data.normal);
-
 						$('#count').text(parseInt($('#count').text()) + 1);
 						if (response.alert) {
-							alertWarning();
+							console.log(sound.play());
 						}
 					} else {
 						$('#alert-error').removeAttr('hidden');

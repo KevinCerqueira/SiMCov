@@ -15,16 +15,17 @@ include_once('../templates/header.php');
 				<p class="h2 text-center">SiMCov
 					<i class="fa fa-user-md" style="color: #000;"></i>
 				</p>
+				<p class="h4 text-center mt-4">Login</p>
 				<div hidden id="alert-error" class="alert alert-danger" role="alert">
 					<p id="alert-text-error" class="h5 m-0"></p>
 				</div>
 				<div class="mb-3">
 					<label for="username" class="form-label">Seu nome de usuário:</label>
-					<input type="text" name="username" id="username" class="form-control">
+					<input required minlength="4" maxlength="16" type="text" name="username" id="username" class="form-control" placeholder="fulanodasilva">
 				</div>
 				<div class="mb-3">
 					<label for="username" class="form-label">Senha:</label>
-					<input type="password" name="password" id="password" class="form-control">
+					<input required minlength="4" maxlength="6" type="password" name="password" id="password" class="form-control" placeholder="******">
 				</div>
 				<div class="mb-3">
 					<button id="btn-entrar" type="submit" class="btn btn-primary">
@@ -40,8 +41,12 @@ include_once('../templates/header.php');
 	</div>
 </div>
 <script>
+	$('#username').keyup(() => {
+		$('#username').val($('#username').val().replace(' ', ''));
+	});
 	$('#form-login').submit(function(event) {
 		event.preventDefault();
+		
 		$.ajax({
 			type: "POST",
 			url: "<?php echo MYPATH; ?>Controllers/login.php",
