@@ -74,6 +74,11 @@ class ServerUDP:
 		
 		request_clean = str(request_raw.decode('utf-8'))
 		
+		# Verificando se é realmente o cliente
+		if(not 'ClientController' in request_clean):
+			print('Conexão externa.')
+			return
+		
 		content_parts = request_clean.split(' ')
 		method = content_parts[0].replace(' ', '')
 		path = content_parts[1].replace(' ', '')

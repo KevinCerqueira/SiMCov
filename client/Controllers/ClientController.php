@@ -17,7 +17,7 @@
 /** Classe responsável por enviar e receber informações do servidor. */
 class ClientController
 {
-    public $host = '127.0.0.1';
+    public $host = 'localhost';
     public $port = [50000, 60000];
     public $count_bytes = 8192;
     public $socket;
@@ -80,6 +80,7 @@ class ClientController
             $this->token = $response->data->token;
             // Deixando o usuário autenticado no sistema
             $_SESSION["auth"] = $this->token;
+            $_SESSION["username"] = $username;
             return $response;
         }
         return $response;
@@ -103,6 +104,7 @@ class ClientController
     public function logout()
     {
         unset($_SESSION["auth"]);
+        unset($_SESSION["username"]);
         $this->token = null;
         return true;
     }
