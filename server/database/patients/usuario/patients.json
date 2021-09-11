@@ -4,43 +4,43 @@
         "nome": "Paciente1",
         "idade": "60",
         "sexo": "F",
-        "medicao": false,
-        "saturacao": 0,
-        "pressao": 0,
-        "batimento": 0,
-        "temperatura": 0
+        "medicao": true,
+        "saturacao": 104,
+        "pressao": 14,
+        "batimento": 117,
+        "temperatura": 39.4
     },
     "1": {
         "id": 1,
         "nome": "Paciente2",
         "idade": "23",
         "sexo": "F",
-        "medicao": false,
-        "saturacao": 0,
-        "pressao": 0,
-        "batimento": 0,
-        "temperatura": 0
+        "medicao": true,
+        "saturacao": 47,
+        "pressao": 104,
+        "batimento": 103,
+        "temperatura": 43.6
     },
     "2": {
         "id": 2,
         "nome": "Paciente3",
         "idade": "50",
         "sexo": "M",
-        "medicao": false,
-        "saturacao": 0,
-        "pressao": 0,
-        "batimento": 0,
-        "temperatura": 0
+        "medicao": true,
+        "saturacao": 76,
+        "pressao": 115,
+        "batimento": 91,
+        "temperatura": 38.70000000000003
     },
     "3": {
         "id": 3,
         "nome": "Paciente4",
         "idade": "78",
         "sexo": "M",
-        "medicao": false,
-        "saturacao": 0,
-        "pressao": 0,
-        "batimento": 0,
-        "temperatura": 0
+        "medicao": true,
+        "saturacao": 90,
+        "pressao": 135,
+        "batimento": 62,
+        "temperatura": 49.50000000000004
     }
 }

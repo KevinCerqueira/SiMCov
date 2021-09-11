@@ -1,3 +1,16 @@
+"""
+ * Componente Curricular: MI Concorrência e Conectividade
+ * Autor: Kevin Cerqueira Gomes
+ *
+ * Declaro que este código foi elaborado por mim de forma individual e
+ * não contém nenhum trecho de código de outro colega ou de outro autor,
+ * tais como provindos de livros e apostilas, e páginas ou documentos
+ * eletrônicos da Internet. Qualquer trecho de código de outra autoria que
+ * uma citação para o  não a minha está destacado com  autor e a fonte do
+ * código, e estou ciente que estes trechos não serão considerados para fins
+ * de avaliação. Alguns trechos do código podem coincidir com de outros
+ * colegas pois estes foram discutidos em sessões tutorias.
+"""
 import socket
 import json
 import sys
@@ -110,21 +123,7 @@ class ServerUDP:
 				
 		# Requisições do tipo GET: retornar dados.
 		elif(method == 'GET'):
-			if(path == '/'):
-				self.sendToClientOk(client, 'Bem vindo ao sistema!')
-			elif(path == '/get/patients'):
-				self.getPatients(client, token, data)
-			elif('/get/patient/' in path):
-				patient_id = path.replace('/get/patient/', '')
-				self.getPatient(client, token, patient_id)
-			elif('/get/list/priority'):
-				self.getListPriority(client, token)
-			elif(path == '/close-connection'):
-				self.closeConnection(client)
-			elif(path == '/close-socket'):
-				self.closeSocket(client)
-			else:
-				self.routeNotFound(client)
+			self.routeNotFound(client)
 				
 		# Requisições do tipo PATCH: para atualizações parciais de dados.
 		elif(method == 'PATCH'):
@@ -173,13 +172,13 @@ class ServerUDP:
 	# Envia dados para o cliente em caso de sucesso
 	def sendToClientOk(self, client, obj):
 		response = json.dumps({'success': True, 'data': obj})
-		print(response)
+		print(True)
 		# return client.sendall(bytes(response.encode('utf-8')))
 	
 	# Envia dados para o cliente em caso de erro
 	def sendToClientError(self, client, msg):
 		response = json.dumps({'success': False, 'error': msg})
-		print(response)
+		print(False)
 		# return client.sendall(bytes(response.encode('utf-8')))
 	
 	# Autoriza ou não a autenticação do usuário

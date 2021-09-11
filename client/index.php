@@ -1,4 +1,18 @@
 <?php
+
+/**
+ * Componente Curricular: MI Concorrência e Conectividade
+ * Autor: Kevin Cerqueira Gomes
+ *
+ * Declaro que este código foi elaborado por mim de forma individual e
+ * não contém nenhum trecho de código de outro colega ou de outro autor,
+ * tais como provindos de livros e apostilas, e páginas ou documentos
+ * eletrônicos da Internet. Qualquer trecho de código de outra autoria que
+ * uma citação para o  não a minha está destacado com  autor e a fonte do
+ * código, e estou ciente que estes trechos não serão considerados para fins
+ * de avaliação. Alguns trechos do código podem coincidir com de outros
+ * colegas pois estes foram discutidos em sessões tutorias.
+ */
 define('MYPATH', '');
 include_once('auth.php');
 include_once('pages/templates/header.php');
@@ -29,12 +43,22 @@ include_once('pages/templates/delete_patient.php');
 </style>
 <title>Dashboard</title>
 <div class="p-5 bg-light m-0" style="height: 100vh;">
-	<div class="container m-0">
+	<div class="m-0">
 		<div class="row bg-white p-3 rounded shadow-sm mb-5">
-			<p class="h2 text-center">
-				SiMCov
-				<i class="fa fa-user-md" style="color: #000;"></i>
-			</p>
+			<div class="row text-center mb-3">
+				<div class="col-md-10 text-center">
+					<p class="h2 m-0">
+						SiMCov
+						<i class="fa fa-user-md" style="color: #000;"></i>
+					</p>
+				</div>
+				<div class="col-md-2">User:
+					<p class="h5 m-0"><?php echo $_SESSION['username']?></p>
+				</div>
+				<div hidden id="alert-error" class="alert alert-danger mt-3" role="alert">
+					<p id="alert-text-error" class="h5 m-0"></p>
+				</div>
+			</div>
 		</div>
 		<div id="menu" class="text-center bg-white p-3 rounded shadow">
 			<div class="row mb-3">

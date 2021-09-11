@@ -1,4 +1,17 @@
 <?php
+/**
+ * Componente Curricular: MI Concorrência e Conectividade
+ * Autor: Kevin Cerqueira Gomes
+ *
+ * Declaro que este código foi elaborado por mim de forma individual e
+ * não contém nenhum trecho de código de outro colega ou de outro autor,
+ * tais como provindos de livros e apostilas, e páginas ou documentos
+ * eletrônicos da Internet. Qualquer trecho de código de outra autoria que
+ * uma citação para o  não a minha está destacado com  autor e a fonte do
+ * código, e estou ciente que estes trechos não serão considerados para fins
+ * de avaliação. Alguns trechos do código podem coincidir com de outros
+ * colegas pois estes foram discutidos em sessões tutorias.
+*/
 include_once('Controllers/patients.php');
 ?>
 <div class="modal fade" id="delete-patient" tabindex="-1" aria-labelledby="delete-patientLabel" aria-hidden="true">
@@ -46,27 +59,7 @@ include_once('Controllers/patients.php');
 			},
 			width: "100%",
 			language: "pt-BR",
-			cache: true,
-			// matcher: (params, data) => {if(params.nome == data) return data;},
-			// ajax: {
-			// 	url: '<?php echo MYPATH; ?>Controllers/patients.php',
-			// 	dataType: 'json',
-			// 	type: 'GET',
-			// 	processResults: function(data) {
-			// 		response = data
-			// 		if (response.success) {
-			// 			return {
-			// 				results: $.map(response.data.patients, function(item) {
-			// 					return {
-			// 						text: item.nome,
-			// 						id: item.id,
-			// 					};
-			// 				}),
-			// 			};
-			// 		}
-
-			// 	},
-			// }
+			cache: true
 		});
 
 

@@ -1,3 +1,16 @@
+"""
+ * Componente Curricular: MI Concorrência e Conectividade
+ * Autor: Kevin Cerqueira Gomes
+ *
+ * Declaro que este código foi elaborado por mim de forma individual e
+ * não contém nenhum trecho de código de outro colega ou de outro autor,
+ * tais como provindos de livros e apostilas, e páginas ou documentos
+ * eletrônicos da Internet. Qualquer trecho de código de outra autoria que
+ * uma citação para o  não a minha está destacado com  autor e a fonte do
+ * código, e estou ciente que estes trechos não serão considerados para fins
+ * de avaliação. Alguns trechos do código podem coincidir com de outros
+ * colegas pois estes foram discutidos em sessões tutorias.
+"""
 
 # Classe que trata e agrupa os dados das medições
 class ControlLevels:
@@ -25,7 +38,10 @@ class ControlLevels:
 		
 		for patient in list_patients_on:
 			if(int(patient[1]['saturacao']) > 95):
-				priority_normal.append(patient)
+				if(float(patient[1]['temperatura']) > 37.5):
+					priority_medium.append(patient)
+				else:
+					priority_normal.append(patient)
 			elif(int(patient[1]['saturacao']) >= 93 and int(patient[1]['saturacao']) <= 95):
 				priority_medium.append(patient)
 			else:
@@ -52,7 +68,9 @@ class ControlLevels:
 				patient[0] = patient[0] + 7
 			
 			# Saturacao
-			if(patient[1]['saturacao'] <= 80):
+			if(patient[1]['saturacao'] <= 70):
+				patient[0] = patient[0] + 40
+			elif(patient[1]['saturacao'] <= 80):
 				patient[0] = patient[0] + 30
 			elif(patient[1]['saturacao'] > 80 and patient[1]['saturacao'] <= 90):
 				patient[0] = patient[0] + 20
@@ -60,7 +78,9 @@ class ControlLevels:
 				patient[0] = patient[0] + 5
 				
 			# Temperatura
-			if(float(patient[1]['temperatura']) > 37.5):
+			if(float(patient[1]['temperatura']) > 39.0):
+				patient[0] = patient[0] + 20
+			elif(float(patient[1]['temperatura']) > 37.5):
 				patient[0] = patient[0] + 10
 			elif(float(patient[1]['temperatura']) < 36.0):
 				patient[0] = patient[0] + 8
