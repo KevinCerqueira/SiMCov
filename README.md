@@ -1,5 +1,6 @@
 # SiMCov - Sistema de Monitoramento de COVID-19
-O intuito deste problema foi a criação de uma API REST utilizando socket puro, onde sensores como oxímetro, termômetro, esfigmomanômetro e frequencímetro (hardwares) podessem enviar dados via socket UDP para o servidor, e o servidor enviasse via socket TCP os dados para o cliente, que nesse caso seria um médico (a), e o mesmo visse os dados de forma ordenada e prioritária as informações e fosse alertado em casos de emergências.
+O intuito deste problema foi a criação de uma API REST utilizando sockets TCP e UDP, no modelo cliente-servidor. Onde sensores como oxímetro, termômetro, esfigmomanômetro e frequencímetro (hardwares) pudessem enviar dados via socket UDP para o servidor, e o servidor enviasse via socket TCP os dados para o cliente, que nesse caso seria um médico (a), e o mesmo visse os dados de forma ordenada e prioritária as informações e fosse alertado em casos de emergências.
+Como solução, desenvolvi o servidor em Python e o cliente em PHP.
 ## Tecnologias utilizadas:
 - Python 3.9.2
 - PHP 7.4.16
