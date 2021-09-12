@@ -12,7 +12,7 @@
 	<script src="<?php echo MYPATH; ?>vendor/jquery/jquery.js"></script>
 	<link href="<?php echo MYPATH; ?>vendor/select2/css/select2.min.css" rel="stylesheet">
 	<script src="<?php echo MYPATH; ?>vendor/select2/js/select2.min.js"></script>
-
+	<link rel="shortcut icon" href="<?php echo MYPATH;?>assets/icon.png" type="image/x-icon">
 </head>
 
 <body>
