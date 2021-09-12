@@ -60,7 +60,7 @@ python serverudp.py
 python simulator.py
 ```
 
-8. Pronto! agora é só acessar a tela inicial do sistema, basta acessar o link 'http://localhost/SiMCov/client' em um navegador
+8. Pronto! agora é só acessar a tela inicial do sistema, basta acessar o link 'http://localhost/SiMCov/client' em um navegador. Para entrar no sistema basta criar uma conta ou fazer login com o usuário padrão: nome: usuario, senha: 1234.
 
 ## Telas:
 - Entrar: http://localhost/SiMCov/client/pages/auth/login.php
