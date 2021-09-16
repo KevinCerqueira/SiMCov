@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Componente Curricular: MI Concorrência e Conectividade
  * Autor: Kevin Cerqueira Gomes
@@ -11,7 +12,7 @@
  * código, e estou ciente que estes trechos não serão considerados para fins
  * de avaliação. Alguns trechos do código podem coincidir com de outros
  * colegas pois estes foram discutidos em sessões tutorias.
-*/
+ */
 include_once('Controllers/patients.php');
 ?>
 <div class="modal fade" id="delete-patient" tabindex="-1" aria-labelledby="delete-patientLabel" aria-hidden="true">
@@ -42,7 +43,12 @@ include_once('Controllers/patients.php');
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-danger">Deletar</button>
+					<button id="btn-deletar" type="submit" class="btn btn-danger">
+						<p id="txt-deletar" class="m-0">Deletar</p>
+						<div hidden id="spinner" class="spinner-border text-light" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</button>
 				</div>
 			</form>
 		</div>
@@ -70,6 +76,11 @@ include_once('Controllers/patients.php');
 				type: "POST",
 				url: "<?php echo MYPATH; ?>Controllers/delete_patient.php",
 				data: $('#form-delete-patient').serialize(),
+				beforeSend: function() {
+					$('#txt-deletar').attr('hidden', '');
+					$('#btn-deletar').attr('disabled', '');
+					$('#spinner').removeAttr('hidden');
+				},
 				success: function(data) {
 					response = JSON.parse(data);
 					if (response.success) {
@@ -80,7 +91,7 @@ include_once('Controllers/patients.php');
 						);
 						$('.inputs').val('');
 						$('#delete-patient').modal('toggle');
-						$("#delete-patient option[value="+id+"]").remove();
+						$("#delete-patient option[value=" + id + "]").remove();
 					} else {
 						Swal.fire(
 							'Houve um erro ao deletar o paciente.',
@@ -95,6 +106,11 @@ include_once('Controllers/patients.php');
 						'',
 						'error'
 					);
+				},
+				complete: function() {
+					$('#txt-deletar').removeAttr('hidden');
+					$('#btn-deletar').removeAttr('disabled');
+					$('#spinner').attr('hidden', '');
 				}
 			});
 		});

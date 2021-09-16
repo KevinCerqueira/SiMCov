@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Componente Curricular: MI Concorrência e Conectividade
  * Autor: Kevin Cerqueira Gomes
@@ -11,7 +12,7 @@
  * código, e estou ciente que estes trechos não serão considerados para fins
  * de avaliação. Alguns trechos do código podem coincidir com de outros
  * colegas pois estes foram discutidos em sessões tutorias.
-*/
+ */
 ?>
 <div class="modal fade" id="register-patient" tabindex="-1" aria-labelledby="register-patientLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
@@ -44,7 +45,12 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-primary">Cadastrar</button>
+					<button id="btn-cadastrar" type="submit" class="btn btn-primary">
+						<p id="txt-cadastrar" class="m-0">Cadastrar</p>
+						<div hidden id="spinner" class="spinner-border text-light" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+					</button>
 				</div>
 			</form>
 		</div>
@@ -57,6 +63,11 @@
 			type: "POST",
 			url: "<?php echo MYPATH; ?>Controllers/register_patient.php",
 			data: $('#form-register-patient').serialize(),
+			beforeSend: function() {
+				$('#txt-cadastrar').attr('hidden', '');
+				$('#btn-cadastrar').attr('disabled', '');
+				$('#spinner').removeAttr('hidden');
+			},
 			success: function(data) {
 				response = JSON.parse(data);
 				if (response.success) {
@@ -80,6 +91,11 @@
 					'',
 					'error'
 				);
+			},
+			complete: function() {
+				$('#txt-cadastrar').removeAttr('hidden');
+				$('#btn-cadastrar').removeAttr('disabled');
+				$('#spinner').attr('hidden', '');
 			}
 		});
 	});
